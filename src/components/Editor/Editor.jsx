@@ -14,7 +14,7 @@ function fieldsReducer(state, action){
     case 'ADD': return [...state, action.field];
     case 'UPDATE': return state.map(f=> f.id===action.id? { ...f, ...action.updates }: f);
     case 'REMOVE': return state.filter(f=> f.id!==action.id);
-    case 'BULK_SET': return [...action.fields];
+  case 'BULK_SET': return Array.isArray(action.fields)? [...action.fields]: [];
     default: return state;
   }
 }
@@ -42,7 +42,26 @@ function Editor(){
   const addField = (type) => { const f = createField(type, { pageId: activePage }); dispatch({ type:'ADD', field:f }); setSelectedFieldId(f.id); };
   const updateField = (id, updates) => dispatch({ type:'UPDATE', id, updates });
   const exportTemplateJson = () => { const json = serializeTemplate(pages, backgrounds, fields); saveAs(new Blob([json],{ type:'application/json'}), `${templateName||'template'}.json`); };
-  const importTemplateJson = (file) => { const r=new FileReader(); r.onload=e=> { const { pages:p, backgrounds:b, fields:f } = deserializeTemplate(e.target.result); setPages(p); setBackgrounds(b); dispatch({ type:'BULK_SET', fields:f }); setActivePage(p[0]?.id||1); }; r.readAsText(file); };
+  const importTemplateJson = (file) => {
+    const r = new FileReader();
+    r.onload = e => {
+      try {
+        const data = deserializeTemplate(e.target.result);
+        const p = Array.isArray(data.pages)? data.pages : [{ id:1 }];
+        const b = data.backgrounds && typeof data.backgrounds==='object' ? data.backgrounds : {};
+        const f = Array.isArray(data.fields)? data.fields : [];
+        setPages(p);
+        setBackgrounds(b);
+        dispatch({ type:'BULK_SET', fields:f });
+        setActivePage(p[0]?.id || 1);
+        setSelectedFieldId(null);
+      } catch(err){
+        console.error('Import failed', err);
+        alert('Invalid template JSON');
+      }
+    };
+    r.readAsText(file);
+  };
   useEffect(()=> { const t=setTimeout(async()=>{ try { const bytes = await buildPdf({ pages, backgrounds, fields, options:{ acroForm:false, flatten:true }}); const url = URL.createObjectURL(new Blob([bytes],{ type:'application/pdf'})); setLivePdfUrl(prev=> { if(prev) URL.revokeObjectURL(prev); return url; }); } catch(e){ console.error(e);} },300); return ()=> clearTimeout(t); }, [pages, backgrounds, fields]);
   const exportPdf = async () => { const bytes = await buildPdf({ pages, backgrounds, fields, options: exportOptions }); saveAs(new Blob([bytes],{ type:'application/pdf'}), `${templateName||'export'}.pdf`); };
   const validateField = (f) => { if(f.required && !String(f.value||'').trim()) return 'Required'; if(f.validation?.regex){ try{ if(!new RegExp(f.validation.regex).test(String(f.value||''))) return 'Invalid'; }catch{} } return null; };

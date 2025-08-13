@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { FiEdit} from 'react-icons/fi'
+import { Link } from 'react-router-dom';
 function Navbar () {
   return (
     <nav className="bg-white shadow-sm">

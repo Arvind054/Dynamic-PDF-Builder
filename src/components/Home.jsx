@@ -2,7 +2,40 @@ import { Link } from 'react-router-dom'
 import { FiEdit, FiUpload, FiShare2, FiDownload, FiCode, FiLayers } from 'react-icons/fi'
 import { FaQrcode } from 'react-icons/fa'
 import Navbar from './Editor/components/Navbar'
+import FeatureCard from './Editor/components/FeatureCard'
 const Home = () => {
+  const features = [
+            {
+              icon: <FiUpload className="h-8 w-8 text-blue-600" />,
+              title: "Upload Backgrounds",
+              description: "Add your own images as PDF backgrounds for custom designs"
+            },
+            {
+              icon: <FiEdit className="h-8 w-8 text-blue-600" />,
+              title: "Drag & Drop Fields",
+              description: "Easily position text, images, and form fields with precision"
+            },
+            {
+              icon: <FiLayers className="h-8 w-8 text-blue-600" />,
+              title: "Multi-page Documents",
+              description: "Create documents with multiple pages and reorder them as needed"
+            },
+            {
+              icon: <FiCode className="h-8 w-8 text-blue-600" />,
+              title: "JSON Data Binding",
+              description: "Automatically populate fields from JSON data sources"
+            },
+            {
+              icon: <FaQrcode className="h-8 w-8 text-blue-600" />,
+              title: "QR Code Generator",
+              description: "Generate QR Codes to add to the PDF"
+            },
+            {
+              icon: <FiDownload className="h-8 w-8 text-blue-600" />,
+              title: "Print-ready PDFs",
+              description: "Export high-quality PDFs with selectable text and vectors"
+            }
+          ];
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/*NavBar */}
@@ -36,52 +69,9 @@ const Home = () => {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            {
-              icon: <FiUpload className="h-8 w-8 text-blue-600" />,
-              title: "Upload Backgrounds",
-              description: "Add your own images as PDF backgrounds for custom designs"
-            },
-            {
-              icon: <FiEdit className="h-8 w-8 text-blue-600" />,
-              title: "Drag & Drop Fields",
-              description: "Easily position text, images, and form fields with precision"
-            },
-            {
-              icon: <FiLayers className="h-8 w-8 text-blue-600" />,
-              title: "Multi-page Documents",
-              description: "Create documents with multiple pages and reorder them as needed"
-            },
-            {
-              icon: <FiCode className="h-8 w-8 text-blue-600" />,
-              title: "JSON Data Binding",
-              description: "Automatically populate fields from JSON data sources"
-            },
-            {
-              icon: <FaQrcode className="h-8 w-8 text-blue-600" />,
-              title: "QR Code Generator",
-              description: "Generate QR Codes to add to the PDF"
-            },
-            {
-              icon: <FiDownload className="h-8 w-8 text-blue-600" />,
-              title: "Print-ready PDFs",
-              description: "Export high-quality PDFs with selectable text and vectors"
-            }
-          ].map((feature, index) => (
+          {features.map((feature, index) => (
             <div key={index} className="pt-6">
-              <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
-                <div className="-mt-6">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-md bg-white shadow-md mx-auto">
-                    {feature.icon}
-                  </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 text-center">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-5 text-base text-gray-600 text-center">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
+               <FeatureCard feature={feature}/>
             </div>
           ))}
         </div>
@@ -112,7 +102,7 @@ const Home = () => {
             <FiEdit className="h-8 w-8 text-white" />
           </div>
           <p className="mt-8 text-center text-base text-gray-400">
-            &copy; {new Date().getFullYear()} PDF Builder. All rights reserved.
+            &copy; {new Date().getFullYear()} PDF Builder. All rights reserved. 
           </p>
         </div>
       </footer>
