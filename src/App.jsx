@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './components/Home'
 import Editor from './components/Editor/Editor'
 function App() {
-
+ // React Router For Routing to different routes
   const router = createBrowserRouter([
     {
       path: "/",
