@@ -1,3 +1,4 @@
+// Different Data Field Component in Editor page
 import React, { useRef, useState, useEffect } from 'react';
 import { FieldType } from '../model/fieldTypes';
 
@@ -10,7 +11,6 @@ export default function FieldBox({ field, selected, onSelect, onUpdate, validate
   const startRef = useRef(null);
   const [local, setLocal] = useState({ x: field.x, y: field.y, w: field.width, h: field.height, r: field.rotation||0 });
 
-  // keep in sync if external change (e.g. duplicate selection adjustments)
   useEffect(()=> { setLocal(l => ({ ...l, x: field.x, y: field.y })); }, [field.x, field.y]);
   useEffect(()=> { setLocal(l => ({ ...l, w: field.width, h: field.height })); }, [field.width, field.height]);
   useEffect(()=> { setLocal(l => ({ ...l, r: field.rotation||0 })); }, [field.rotation]);

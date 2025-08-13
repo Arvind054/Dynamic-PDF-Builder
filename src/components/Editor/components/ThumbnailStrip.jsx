@@ -1,3 +1,4 @@
+// Thumbnail Component
 import React from 'react';
 
 export default function ThumbnailStrip({ pages, backgrounds, activePage, onSelect, onReorder }) {

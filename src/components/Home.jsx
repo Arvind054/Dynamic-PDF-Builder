@@ -1,3 +1,4 @@
+// Home page
 import { Link } from 'react-router-dom'
 import { FiEdit, FiUpload, FiShare2, FiDownload, FiCode, FiLayers } from 'react-icons/fi'
 import { FaQrcode } from 'react-icons/fa'

@@ -1,4 +1,4 @@
-// Enumerations & factories for editor field types
+// Different Fields for the data Types to be inserted in PDF
 export const FieldType = {
   TEXT: 'text',
   DATE: 'date',
@@ -9,6 +9,7 @@ export const FieldType = {
   BARCODE: 'barcode'
 };
 
+// Function to add fields to the PDF
 export function createField(type, overrides = {}) {
   const base = {
     id: crypto.randomUUID(),
@@ -50,10 +51,12 @@ export function createField(type, overrides = {}) {
   return { ...base, ...overrides };
 }
 
+// To Duplicate a Data Field
 export function cloneField(field, overrides={}) {
   return { ...field, id: crypto.randomUUID(), ...overrides };
 }
 
+// To serialize & deserialize 
 export function serializeTemplate(pages, backgrounds, fields) {
   return JSON.stringify({ version: 1, pages, backgrounds, fields }, null, 2);
 }

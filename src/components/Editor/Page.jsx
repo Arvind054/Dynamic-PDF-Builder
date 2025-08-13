@@ -1,4 +1,4 @@
-// Page.js
+// Page Component
 import React, { useRef, useState } from 'react';
 
 function FieldBox({ field, selected, onSelect, onUpdate }) {

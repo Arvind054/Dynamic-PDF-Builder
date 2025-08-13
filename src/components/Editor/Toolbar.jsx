@@ -1,4 +1,4 @@
-// Toolbar.js
+// Toolbar for Data Fields to chnage Properties
 import React from 'react';
 import { FaPlus, FaFilePdf, FaImage, FaFont, FaCalendarAlt, FaCheckSquare, FaSignature, FaQrcode, FaBarcode, FaFileExport, FaFileImport } from 'react-icons/fa';
 import { FieldType } from './model/fieldTypes';

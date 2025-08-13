@@ -1,5 +1,5 @@
+// Feature Card for the Home page
 import React from 'react'
-
 function FeatureCard({feature}) {
   return (
      <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">

@@ -1,3 +1,4 @@
+// Editor Page
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import Toolbar from './Toolbar.jsx';
 import ThumbnailStrip from './components/ThumbnailStrip.jsx';
@@ -8,6 +9,7 @@ import { saveAs } from 'file-saver';
 import { buildPdf, PAGE_SIZE } from './utils/pdfExport.js';
 import QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
+
 
 function fieldsReducer(state, action){
   switch(action.type){
@@ -32,10 +34,13 @@ function Editor(){
   const [signatureTargetField, setSignatureTargetField] = useState(null);
   const selectedField = useMemo(()=> fields.find(f=>f.id===selectedFieldId), [fields, selectedFieldId]);
 
+  // To add new Page
   const addPage = () => {
     const id = pages.length? Math.max(...pages.map(p=>p.id))+1: 1;
     setPages([...pages, { id }]); setActivePage(id);
   };
+
+  // Handle the Background Image Upload
   const handleUploadBackground = (files) => {
     [...files].forEach(file=> { const r=new FileReader(); r.onload=e=> setBackgrounds(b=> ({ ...b, [activePage]: e.target.result })); r.readAsDataURL(file); });
   };
