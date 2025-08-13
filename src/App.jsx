@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './App.css'
 import Home from './components/Home'
-import Create from './components/Create'
+import Editor from './components/Editor/Editor'
 function App() {
 
   const router = createBrowserRouter([
@@ -10,8 +9,8 @@ function App() {
       path: "/",
       element: <Home/>
     },{
-      path: "/create",
-      element: <Create/>
+      path: "/editor",
+      element: <Editor/>
     }
   ])
 

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FiEdit, FiUpload, FiShare2, FiDownload, FiCode, FiLayers } from 'react-icons/fi'
+import { FaQrcode } from 'react-icons/fa'
 
 const Home = () => {
   return (
@@ -76,9 +77,9 @@ const Home = () => {
               description: "Automatically populate fields from JSON data sources"
             },
             {
-              icon: <FiShare2 className="h-8 w-8 text-blue-600" />,
-              title: "Template System",
-              description: "Save and reuse your designs for future documents"
+              icon: <FaQrcode className="h-8 w-8 text-blue-600" />,
+              title: "QR Code Generator",
+              description: "Generate QR Codes to add to the PDF"
             },
             {
               icon: <FiDownload className="h-8 w-8 text-blue-600" />,
