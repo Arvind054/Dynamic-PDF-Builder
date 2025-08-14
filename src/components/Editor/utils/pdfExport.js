@@ -1,3 +1,4 @@
+// PDF Export Utility
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { FieldType } from '../model/fieldTypes';
 
@@ -5,7 +6,7 @@ const PAGE_WIDTH = 595; // A4 ~ 72dpi
 const PAGE_HEIGHT = 842;
 
 function toPdfY(y, height){
-  return PAGE_HEIGHT - y - height; // convert top-left to bottom-left
+  return PAGE_HEIGHT - y - height; 
 }
 
 export async function buildPdf({ pages, backgrounds, fields, options }) {
